@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <!-- dvh polyfill: sets --vh on :root for browsers that don't support dvh -->
+  <style>
+    :root { --vh: 1vh; }
+  </style>
+  <script>
+    (function(){
+      function setVH(){
+        document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px');
+      }
+      setVH();
+      window.addEventListener('resize', setVH);
+      window.addEventListener('orientationchange', function(){ setTimeout(setVH, 200); });
+    })();
+  </script>
+  <title>THE BIRTHDAY — ACROSS WORLDS | Adi Anniya</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- PARTICLE CANVAS (global) -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- =============================================
+       SCENE 1 — BIRTHDAY INTRO
+  ============================================== -->
+  <section id="scene-intro" class="scene active">
+    <div class="intro-overlay"></div>
+    <div class="intro-content">
+      <div id="boot-sequence">
+        <p class="boot-line" id="boot-1">INITIALIZING…</p>
+        <p class="boot-line" id="boot-2">LOADING BIRTHDAY PROTOCOL…</p>
+        <p class="boot-line" id="boot-3">SCANNING PROTAGONIST…</p>
+        <p class="boot-line" id="boot-4">IDENTITY CONFIRMED.</p>
+      </div>
+      <div id="identity-reveal" class="hidden">
+        <h1 class="protagonist-name">ADI ANNIYA</h1>
+      </div>
+      <div id="birthday-message" class="hidden">
+        <h2 class="birthday-title">HAPPY BIRTHDAY, ADI ANNIYA! 🎂</h2>
+        <p class="birthday-subtitle">TODAY, YOU'RE THE PROTAGONIST.</p>
+      </div>
+      <div id="chapter-reveal" class="hidden">
+        <span class="chapter-label">CHAPTER 01</span>
+        <h3 class="chapter-title">THE BEGINNING</h3>
+        <button id="begin-btn" class="cta-btn">BEGIN YOUR JOURNEY →</button>
+      </div>
+    </div>
+    <div class="confetti-container" id="confetti-container"></div>
+    <div class="scan-line"></div>
+    <div class="film-grain"></div>
+  </section>
+
+  <!-- =============================================
+       SCENE 2 — NARUTO
+  ============================================== -->
+  <section id="scene-naruto" class="scene hidden">
+    <div class="scene-bg-wrap">
+      <img
+        src="images/Naruto.png"
+        alt="Naruto — Adi Anniya"
+        class="scene-image naruto-img"
+        id="naruto-img"
+      />
+      <div class="scene-vignette"></div>
+      <div class="scene-color-overlay naruto-overlay"></div>
+    </div>
+
+    <!-- Leaf particles -->
+    <div class="leaves-container" id="leaves-container"></div>
+    <!-- Smoke -->
+    <div class="smoke-layer" id="smoke-layer"></div>
+
+    <div class="scene-content naruto-content" id="naruto-content">
+      <div class="chapter-badge">
+        <span class="chapter-num">CHAPTER 01</span>
+        <span class="chapter-name">THE BEGINNING</span>
+      </div>
+      <div class="scroll-reveal-container" id="naruto-scroll">
+        <div class="scroll-paper">
+          <div class="scroll-top-edge"></div>
+          <div class="scroll-body">
+            <p class="letter-line">To my dearest <strong>Adi Anniya</strong>,</p>
+            <p class="letter-line">From all the random fights, stupid arguments, childhood memories, and countless moments we've shared, you've grown into someone I'm genuinely proud of.</p>
+            <p class="letter-line">No matter how far life takes you, I hope you keep chasing the things that make you happy, building things you're proud of, and creating a life that's truly yours.</p>
+            <p class="letter-line">You've already come so far, and I know there's still so much more waiting for you.</p>
+            <p class="letter-line signature">Happy Birthday, Adi Anniya. ❤️</p>
+            <p class="letter-line italic">This isn't the end of your story.</p>
+            <p class="letter-line italic">It's just the beginning of your next chapter.</p>
+          </div>
+          <div class="scroll-bottom-edge"></div>
+        </div>
+      </div>
+      <button class="next-scene-btn" id="naruto-next">NEXT CHAPTER →</button>
+    </div>
+    <div class="film-grain"></div>
+  </section>
+
+  <!-- =============================================
+       SCENE 3 — ONE PIECE
+  ============================================== -->
+  <section id="scene-onepiece" class="scene hidden">
+    <div class="scene-bg-wrap">
+      <img
+        src="images/Monkey D. Luffy.png"
+        alt="Monkey D. Luffy — One Piece"
+        class="scene-image luffy-img"
+        id="luffy-img"
+      />
+      <div class="scene-vignette"></div>
+      <div class="scene-color-overlay onepiece-overlay"></div>
+      <div class="ocean-shimmer"></div>
+    </div>
+
+    <!-- Wind / ocean particles -->
+    <div class="wind-particles" id="wind-particles"></div>
+
+    <div class="scene-content onepiece-content" id="onepiece-content">
+      <div class="chapter-badge op-badge">
+        <span class="chapter-num">CHAPTER 02</span>
+        <span class="chapter-name">THE GRAND LINE</span>
+      </div>
+      <div class="op-text-block" id="op-text-block">
+        <p class="op-line" id="op-line-1">Every adventure begins with a dream.</p>
+        <p class="op-line op-tagline" id="op-line-2">Set sail, Adi Anniya.</p>
+      </div>
+      <button class="next-scene-btn op-btn" id="onepiece-next">NEXT CHAPTER →</button>
+    </div>
+    <div class="film-grain"></div>
+  </section>
+
+  <!-- =============================================
+       SCENE 4 — DRAGON BALL Z
+  ============================================== -->
+  <section id="scene-dbz" class="scene hidden">
+    <div class="scene-bg-wrap">
+      <img
+        src="images/dragon Ball Z.png"
+        alt="Dragon Ball Z"
+        class="scene-image dbz-img"
+        id="dbz-img"
+      />
+      <div class="scene-vignette"></div>
+      <div class="scene-color-overlay dbz-overlay"></div>
+      <div class="energy-aura" id="energy-aura"></div>
+    </div>
+
+    <!-- Lightning bolts -->
+    <canvas id="lightning-canvas"></canvas>
+    <!-- Energy particles -->
+    <div class="energy-particles" id="energy-particles"></div>
+
+    <div class="scene-content dbz-content" id="dbz-content">
+      <div class="power-sequence" id="power-sequence">
+        <p class="power-line" id="power-1">POWER LEVEL: LOADING…</p>
+        <div class="power-bar-wrap" id="power-bar-wrap">
+          <div class="power-bar" id="power-bar"></div>
+        </div>
+        <p class="power-line power-complete hidden" id="power-2">POWER-UP COMPLETE</p>
+        <p class="power-line power-unlock hidden" id="power-3">NEW LEVEL UNLOCKED</p>
+        <p class="power-line power-year hidden" id="power-4">+1 YEAR</p>
+      </div>
+      <button class="next-scene-btn dbz-btn hidden" id="dbz-next">MORE TO COME →</button>
+    </div>
+
+    <!-- White flash overlay -->
+    <div class="white-flash" id="white-flash"></div>
+    <div class="film-grain"></div>
+  </section>
+
+  <!-- =============================================
+       SCENE 5 — DEATH NOTE
+  ============================================== -->
+  <section id="scene-deathnote" class="scene hidden">
+    <div class="scene-bg-wrap">
+      <img
+        src="images/Death Note.png"
+        alt="Death Note"
+        class="scene-image dn-img"
+        id="dn-img"
+      />
+      <div class="scene-vignette dn-vignette"></div>
+      <div class="scene-color-overlay dn-overlay"></div>
+      <div class="dn-flicker" id="dn-flicker"></div>
+    </div>
+
+    <!-- Black feathers -->
+    <div class="feathers-container" id="feathers-container"></div>
+
+    <div class="scene-content dn-content" id="dn-content">
+      <div class="chapter-badge dn-badge">
+        <span class="chapter-num">CHAPTER 04</span>
+        <span class="chapter-name">THE DARKER SIDE</span>
+      </div>
+      <div class="dn-text-block" id="dn-text-block">
+        <p class="dn-protocol" id="dn-protocol">BIRTHDAY PROTOCOL</p>
+        <p class="dn-sub" id="dn-sub">CONTINUING…</p>
+      </div>
+      <button class="next-scene-btn dn-btn" id="dn-next">NEXT CHAPTER →</button>
+    </div>
+    <div class="film-grain"></div>
+  </section>
+
+  <!-- =============================================
+       SCENE 6 — ATTACK ON TITAN
+  ============================================== -->
+  <section id="scene-aot" class="scene hidden">
+    <div class="scene-bg-wrap">
+      <img
+        src="images/Attack On Titan.png"
+        alt="Attack on Titan"
+        class="scene-image aot-img"
+        id="aot-img"
+      />
+      <div class="scene-vignette"></div>
+      <div class="scene-color-overlay aot-overlay"></div>
+      <div class="aot-smoke-layer" id="aot-smoke-layer"></div>
+    </div>
+
+    <!-- Embers / wind -->
+    <div class="embers-container" id="embers-container"></div>
+    <canvas id="aot-canvas"></canvas>
+
+    <div class="scene-content aot-content" id="aot-content">
+      <div class="chapter-badge aot-badge">
+        <span class="chapter-num">CHAPTER 05</span>
+        <span class="chapter-name">KEEP MOVING FORWARD</span>
+      </div>
+      <div class="aot-text-block" id="aot-text-block">
+        <p class="aot-line aot-courage" id="aot-line-1">COURAGE</p>
+        <p class="aot-line" id="aot-line-2">KEEP MOVING FORWARD.</p>
+        <p class="aot-line aot-story" id="aot-line-3">YOUR STORY IS FAR FROM OVER.</p>
+      </div>
+      <button class="next-scene-btn aot-btn" id="aot-next">NEXT CHAPTER →</button>
+    </div>
+    <div class="film-grain"></div>
+  </section>
+
+  <!-- =============================================
+       SCENE 7 — JUJUTSU KAISEN
+  ============================================== -->
+  <section id="scene-jjk" class="scene hidden">
+    <div class="scene-bg-wrap">
+      <img
+        src="images/Jujutsu Kaisen.png"
+        alt="Jujutsu Kaisen"
+        class="scene-image jjk-img"
+        id="jjk-img"
+      />
+      <div class="scene-vignette jjk-vignette"></div>
+      <div class="scene-color-overlay jjk-overlay"></div>
+      <div class="jjk-ripple-layer" id="jjk-ripple-layer">
+        <div class="jjk-ripple"></div>
+        <div class="jjk-ripple" style="animation-delay:0.6s"></div>
+        <div class="jjk-ripple" style="animation-delay:1.2s"></div>
+      </div>
+      <div class="jjk-distort" id="jjk-distort"></div>
+    </div>
+
+    <!-- JJK particles -->
+    <div class="jjk-particles" id="jjk-particles"></div>
+    <canvas id="jjk-canvas"></canvas>
+
+    <div class="scene-content jjk-content" id="jjk-content">
+      <div class="chapter-badge jjk-badge">
+        <span class="chapter-num">CHAPTER 06</span>
+        <span class="chapter-name">CURSED ENERGY</span>
+      </div>
+      <div class="jjk-text-block" id="jjk-text-block">
+        <p class="jjk-potential" id="jjk-potential">INFINITE POTENTIAL</p>
+        <p class="jjk-sub" id="jjk-sub">ADI ANNIYA</p>
+      </div>
+      <button class="next-scene-btn jjk-btn" id="jjk-next">CONTINUE THE JOURNEY →</button>
+    </div>
+    <div class="film-grain"></div>
+  </section>
+
+  <!-- =============================================
+       SCENE 8 — SOLO LEVELING
+  ============================================== -->
+  <section id="scene-solo" class="scene hidden">
+    <div class="scene-bg-wrap">
+      <img
+        src="images/Solo Leveling.png"
+        alt="Solo Leveling"
+        class="scene-image solo-img"
+        id="solo-img"
+      />
+      <div class="scene-vignette solo-vignette"></div>
+      <div class="scene-color-overlay solo-overlay"></div>
+      <!-- Shadow army effect layer -->
+      <div class="solo-shadow-layer" id="solo-shadow-layer"></div>
+    </div>
+
+    <!-- Shadow particles -->
+    <div class="shadow-particles" id="shadow-particles"></div>
+    <canvas id="solo-canvas"></canvas>
+
+    <div class="scene-content solo-content" id="solo-content">
+      <div class="chapter-badge solo-badge">
+        <span class="chapter-num">CHAPTER 07</span>
+        <span class="chapter-name">ARISE</span>
+      </div>
+      <div class="solo-text-block" id="solo-text-block">
+        <p class="solo-arise hidden" id="solo-arise">ARISE.</p>
+        <p class="solo-levelup hidden" id="solo-levelup">LEVEL UP COMPLETE</p>
+        <p class="solo-year hidden" id="solo-year">+1 YEAR</p>
+        <div class="solo-skill-box hidden" id="solo-skill-box">
+          <p class="solo-skill-label">NEW SKILL UNLOCKED</p>
+          <p class="solo-skill-name">ANOTHER YEAR OF GREATNESS</p>
+        </div>
+      </div>
+      <button class="next-scene-btn solo-btn hidden" id="solo-next">NEXT CHAPTER →</button>
+    </div>
+    <div class="film-grain"></div>
+  </section>
+
+  <!-- =============================================
+       SCENE 9 — POKÉMON
+  ============================================== -->
+  <section id="scene-pokemon" class="scene hidden">
+    <div class="scene-bg-wrap">
+      <img
+        src="images/Pokemon.png"
+        alt="Pokémon"
+        class="scene-image poke-img"
+        id="poke-img"
+      />
+      <div class="scene-vignette poke-vignette"></div>
+      <div class="scene-color-overlay poke-overlay"></div>
+      <!-- Sky brightness overlay -->
+      <div class="poke-sky-layer" id="poke-sky-layer"></div>
+      <!-- Scan line -->
+      <div class="pokedex-scan" id="pokedex-scan"></div>
+    </div>
+
+    <!-- Floating light particles -->
+    <div class="poke-particles" id="poke-particles"></div>
+
+    <!-- Pokédex HUD overlay -->
+    <div class="pokedex-hud" id="pokedex-hud">
+      <div class="pokedex-corner tl"></div>
+      <div class="pokedex-corner tr"></div>
+      <div class="pokedex-corner bl"></div>
+      <div class="pokedex-corner br"></div>
+      <div class="pokedex-data" id="pokedex-data">
+        <p class="pdx-line" id="pdx-0">TRAINER IDENTIFIED</p>
+        <p class="pdx-line pdx-name" id="pdx-1">NAME: ADI ANNIYA</p>
+        <p class="pdx-line" id="pdx-2">LEVEL: +1</p>
+        <p class="pdx-line" id="pdx-3">POKÉMON: 6</p>
+        <p class="pdx-line pdx-status" id="pdx-4">STATUS: BIRTHDAY SUCCESSFULLY DEPLOYED</p>
+        <div class="pdx-divider"></div>
+        <p class="pdx-line pdx-league" id="pdx-5">INDIGO LEAGUE</p>
+        <p class="pdx-line pdx-continue" id="pdx-6">ADVENTURE CONTINUES</p>
+      </div>
+    </div>
+
+    <div class="scene-content poke-content" id="poke-content">
+      <div class="chapter-badge poke-badge">
+        <span class="chapter-num">CHAPTER 08</span>
+        <span class="chapter-name">GOTTA CATCH 'EM ALL</span>
+      </div>
+      <button class="next-scene-btn poke-btn" id="poke-next">NEXT CHAPTER →</button>
+    </div>
+    <div class="film-grain"></div>
+  </section>
+
+  <!-- =============================================
+       SCENE 10 — HARRY POTTER
+  ============================================== -->
+  <section id="scene-hp" class="scene hidden">
+    <div class="scene-bg-wrap">
+      <img
+        src="images/Harry Potter.png"
+        alt="Harry Potter"
+        class="scene-image hp-img"
+        id="hp-img"
+      />
+      <div class="scene-vignette hp-vignette"></div>
+      <div class="scene-color-overlay hp-overlay"></div>
+      <!-- Magical atmosphere glow -->
+      <div class="hp-magic-glow" id="hp-magic-glow"></div>
+    </div>
+
+    <!-- Magical sparks / particles -->
+    <div class="hp-sparks" id="hp-sparks"></div>
+    <canvas id="hp-canvas"></canvas>
+
+    <!-- Glitch / crack overlays (activated at end) -->
+    <div class="hp-crack-layer" id="hp-crack-layer">
+      <div class="hp-crack" id="crack-1"></div>
+      <div class="hp-crack" id="crack-2"></div>
+      <div class="hp-crack" id="crack-3"></div>
+    </div>
+    <div class="hp-glitch-bar" id="hp-glitch-bar"></div>
+    <div class="hp-static-overlay" id="hp-static-overlay"></div>
+
+    <div class="scene-content hp-content" id="hp-content">
+      <div class="chapter-badge hp-badge">
+        <span class="chapter-num">CHAPTER 09</span>
+        <span class="chapter-name">ONE FINAL SPELL</span>
+      </div>
+      <div class="hp-text-block" id="hp-text-block">
+        <p class="hp-line hp-final" id="hp-line-1">ONE FINAL SPELL…</p>
+        <p class="hp-line hp-spell hidden" id="hp-line-2">INCENDIO!</p>
+      </div>
+      <button class="next-scene-btn hp-btn hidden" id="hp-next">ENTER THE NEXT WORLD →</button>
+    </div>
+
+    <!-- Spell flash -->
+    <div class="hp-spell-flash" id="hp-spell-flash"></div>
+    <div class="film-grain"></div>
+  </section>
+
+  <!-- =============================================
+       SCENE 11 — GOOGLE REFERRAL
+  ============================================== -->
+  <section id="scene-referral" class="scene hidden">
+    <!-- Animated background grid -->
+    <div class="ref-bg">
+      <div class="ref-grid"></div>
+      <div class="ref-glow-orb ref-orb-1"></div>
+      <div class="ref-glow-orb ref-orb-2"></div>
+      <div class="ref-scanline"></div>
+    </div>
+
+    <div class="ref-content" id="ref-content">
+
+      <!-- Header -->
+      <div class="ref-header" id="ref-header">
+        <div class="ref-logo-row">
+          <span class="ref-logo-g">G</span><span class="ref-logo-o1">o</span><span class="ref-logo-o2">o</span><span class="ref-logo-g2">g</span><span class="ref-logo-l">l</span><span class="ref-logo-e">e</span>
+          <span class="ref-logo-dot"> · </span>
+          <span class="ref-logo-careers">Careers</span>
+        </div>
+        <p class="ref-subtitle">EMPLOYEE REFERRAL PORTAL</p>
+        <div class="ref-divider"></div>
+      </div>
+
+      <!-- Request card -->
+      <div class="ref-card" id="ref-card">
+        <div class="ref-card-header">
+          <span class="ref-tag">INCOMING REQUEST</span>
+          <span class="ref-tag ref-tag-urgent">PRIORITY: HIGH</span>
+        </div>
+
+        <div class="ref-card-body">
+          <div class="ref-field">
+            <span class="ref-field-label">CANDIDATE</span>
+            <span class="ref-field-value">Chandru (Sibling Unit v1.0)</span>
+          </div>
+          <div class="ref-field">
+            <span class="ref-field-label">REFERRED BY</span>
+            <span class="ref-field-value ref-gold">ADI ANNIYA — Google Engineer</span>
+          </div>
+          <div class="ref-field">
+            <span class="ref-field-label">POSITION</span>
+            <span class="ref-field-value">Software Engineer, L4</span>
+          </div>
+          <div class="ref-field">
+            <span class="ref-field-label">NOTE</span>
+            <span class="ref-field-value ref-note">"He's my brother. He's good. Just do it." 😂</span>
+          </div>
+        </div>
+
+        <!-- Status bar -->
+        <div class="ref-status-bar">
+          <div class="ref-status-fill" id="ref-status-fill"></div>
+        </div>
+        <p class="ref-status-label" id="ref-status-label">AWAITING YOUR DECISION…</p>
+      </div>
+
+      <!-- Buttons -->
+      <div class="ref-btn-row" id="ref-btn-row">
+        <button class="ref-btn ref-approve" id="ref-approve">✓ APPROVE REFERRAL</button>
+        <button class="ref-btn ref-reject" id="ref-reject">✗ REJECT REFERRAL</button>
+      </div>
+
+      <!-- Escape messages shown during dodge attempts -->
+      <p class="ref-escape-msg" id="ref-escape-msg"></p>
+
+    </div>
+
+    <div class="film-grain"></div>
+  </section>
+
+  <!-- =============================================
+       SCENE 12 — FINAL BIRTHDAY
+  ============================================== -->
+  <section id="scene-final" class="scene hidden">
+    <div class="final-bg">
+      <div class="final-rays" id="final-rays"></div>
+    </div>
+
+    <!-- Firework canvas -->
+    <canvas id="firework-canvas"></canvas>
+
+    <div class="final-content" id="final-content">
+      <p class="final-approved hidden" id="final-approved">🎉 REFERRAL REQUEST APPROVED 🎉</p>
+      <h1 class="final-name hidden" id="final-name">HAPPY BIRTHDAY,<br>ADI ANNIYA! ❤️</h1>
+      <div class="final-punchline hidden" id="final-punchline">
+        <p class="final-pline">Now seriously…</p>
+        <p class="final-pline final-pline-big">about that referral. 👀😂</p>
+      </div>
+      <div class="final-restart hidden" id="final-restart">
+        <button class="cta-btn final-restart-btn" id="final-restart-btn">↩ WATCH AGAIN</button>
+      </div>
+    </div>
+
+    <div class="film-grain"></div>
+  </section>
+
+  <!-- =============================================
+       TRANSITION OVERLAY
+  ============================================== -->
+  <div class="transition-overlay" id="transition-overlay"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
